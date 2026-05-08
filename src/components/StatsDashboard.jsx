@@ -1,5 +1,5 @@
 import React from 'react';
-import { getUpcomingInterviews } from '../utils/dateUtils';
+import { getDaysUntilInterview, formatDate, getUpcomingInterviews } from '../utils/dateUtils';
 
 export default function StatsDashboard({ jobs}){
       const interviewJobs = jobs.filter(
@@ -19,7 +19,11 @@ export default function StatsDashboard({ jobs}){
 
       const successRate = totalApplications > 0 ? ((offerCount / totalApplications) * 100) : 0;
 
-      
+      const upcomingInterviews = getUpcomingInterviews(jobs);
+
+      const daysRemaining = getDaysUntilInterview(interview.interviewDate);
+
+
 
 
   return (
@@ -35,6 +39,34 @@ export default function StatsDashboard({ jobs}){
       <p>Total Rejections: {rejectedCount}</p>
 
       <p> success rate : {successRate.toFixed(2)}%</p>
+
+      <p>Upcoming Interviews : {upcomingInterviews.length}</p>
+      {
+        upcomingInterviews.map(interview => (
+          <div>
+            <p>{interview.company}</p>
+            <p>{interview.role}</p>
+            <p>{formatDate(interview.date)}</p>
+          </div>
+        ))
+      }
+      <p>
+        {
+          getDaysUntilInterview(
+            interview.interviewDate
+          ) === 0
+            ? "Today"
+            : `${getDaysUntilInterview(
+                interview.interviewDate
+              )} days left`
+        }
+        {
+          upcomingInterviews.length === 0 && (
+           <p>No interviews</p>
+          )
+        }
+      </p>
+
 
 
 
