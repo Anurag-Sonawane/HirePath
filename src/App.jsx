@@ -82,7 +82,13 @@ export default function App() {
           <JobForm onAddJob={addJob} />
         ) : (
           <div className="view-container">
-            {activeTab === 'kanban' && <KanbanBoard jobs={jobs} />}
+            {activeTab === 'kanban' && (
+              <KanbanBoard 
+                jobs={jobs} 
+                onStatusUpdate={updateJobStatus} 
+                onDelete={deleteJob} 
+              />
+            )}
             {activeTab === 'stats' && <StatsDashboard jobs={jobs} />}
           </div>
         )}
