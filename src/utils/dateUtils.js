@@ -12,6 +12,7 @@ export function formatDate(dateString) {
       return ''
     }
 
+    // month is 0-indexed in Date constructor
     const date = new Date(year, month - 1, day)
     const options = {
       year: 'numeric',
@@ -31,6 +32,7 @@ export function isToday(dateString) {
   try {
     const [year, month, day] = dateString.split('-').map(Number)
     
+    // Normalize both dates to midnight for accurate comparison
     const inputDate = new Date(year, month - 1, day)
     const today = new Date()
     const todayNormalized = new Date(today.getFullYear(), today.getMonth(), today.getDate())
@@ -53,6 +55,7 @@ export function isTomorrow(dateString) {
     
     const inputDate = new Date(year, month - 1, day)
 
+    // Calculate tomorrow with automatic month/year boundary handling
     const tomorrow = new Date()
     tomorrow.setDate(tomorrow.getDate() + 1)
     const tomorrowNormalized = new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate())
@@ -75,6 +78,7 @@ export function getDaysUntilInterview(dateString) {
     
     const interviewDate = new Date(year, month - 1, day)
 
+    // Normalize today to midnight for accurate day calculation
     const today = new Date()
     const todayNormalized = new Date(today.getFullYear(), today.getMonth(), today.getDate())
 
@@ -94,10 +98,12 @@ export function getUpcomingInterviews(jobs) {
 
   return jobs
     .filter(job => job.interviewDate && job.interviewDate.trim() !== '')
+    // Only include interviews within next 7 days (exclude past dates)
     .filter(job => {
       const daysUntil = getDaysUntilInterview(job.interviewDate)
       return daysUntil !== null && daysUntil >= 0 && daysUntil <= 7
     })
+    // Sort by urgency (closest interview first)
     .sort((jobA, jobB) => {
       const daysA = getDaysUntilInterview(jobA.interviewDate)
       const daysB = getDaysUntilInterview(jobB.interviewDate)
