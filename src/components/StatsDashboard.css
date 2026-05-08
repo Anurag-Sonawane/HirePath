@@ -1,0 +1,30 @@
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  gap: 16px;
+  padding: 20px;
+}
+
+.stat-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+.bar-container {
+  width: 100%;
+  background: #ddd;
+  height: 20px;
+}
+
+.bar {
+  height: 100%;
+  background: rgb(176, 176, 252);
+}
+
+.funnel-row {
+  margin-bottom: 16px;
+}
