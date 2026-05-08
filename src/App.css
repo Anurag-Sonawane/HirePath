@@ -350,7 +350,7 @@ body {
   border-radius: 0.85rem;
   padding: 1rem;
   transition: all 0.2s ease;
-  cursor: pointer;
+  cursor: move;
 }
 
 .kanban-job-card:hover {
@@ -358,6 +358,12 @@ body {
   border-color: rgba(148, 163, 184, 0.28);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.kanban-job-card.dragging {
+  opacity: 0.5;
+  background: rgba(255, 255, 255, 0.03);
+  cursor: grabbing;
 }
 
 .kanban-job-card h4 {
@@ -382,6 +388,12 @@ body {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
+}
+
+.kanban-column-body.drag-over {
+  background: rgba(59, 130, 246, 0.15);
+  border: 2px dashed rgba(59, 130, 246, 0.5);
+  transition: background 0.2s ease, border 0.2s ease;
 }
 
 @media (max-width: 1024px) {
