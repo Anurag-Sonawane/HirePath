@@ -247,19 +247,62 @@ body {
 .kanban-column-body {
   background: rgba(148, 163, 184, 0.08);
   border-radius: 0.9rem;
-  padding: 0.75rem;
+  padding: 1rem;
   min-height: 120px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
 }
 
-.kanban-column-body p.empty-message {
+.kanban-column-body .empty-message {
   color: #cbd5e1;
   text-align: center;
   font-size: 0.95rem;
   line-height: 1.5;
   margin-top: 1rem;
+}
+
+.kanban-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.kanban-job-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 0.85rem;
+  padding: 1rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.kanban-job-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(148, 163, 184, 0.28);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.kanban-job-card h4 {
+  color: #eff6ff;
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.kanban-job-card .job-title {
+  color: #94a3b8;
+  font-size: 0.88rem;
+  margin-bottom: 0.5rem;
+}
+
+.kanban-job-card .job-status {
+  display: inline-block;
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 /* Adjust Job Card exclusively when inside Kanban to prevent overlapping/squishing */
@@ -295,30 +338,50 @@ body {
   font-size: 0.8rem;
 }
 
-.kanban-task-list {
+.kanban-cards-container {
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
 }
 
-.kanban-task {
+.kanban-job-card {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(148, 163, 184, 0.18);
   border-radius: 0.85rem;
-  padding: 0.9rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
+  padding: 1rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
 
-.kanban-task strong {
+.kanban-job-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(148, 163, 184, 0.28);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.kanban-job-card h4 {
   color: #eff6ff;
   font-size: 0.98rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
 }
 
-.kanban-task span {
+.kanban-job-card .job-title {
   color: #94a3b8;
   font-size: 0.88rem;
+  margin-bottom: 0.5rem;
+}
+
+.kanban-job-card .job-status {
+  display: inline-block;
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 @media (max-width: 1024px) {
