@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import './App.css'
 import JobForm from './components/JobForm'
-import JobCard from './components/JobCard'
 import KanbanBoard from './components/KanbanBoard'
 import StatsDashboard from './components/StatsDashboard'
 

@@ -8,7 +8,7 @@ const columns = [
   { title: 'Rejected', status: 'Rejected' }
 ]
 
-function JobCardItem({ job, onUpdateStatus, isDragging, onDragStart }) {
+function JobCardItem({ job, isDragging, onDragStart, onDragEnd }) {
   const handleDragStart = (e) => {
     e.dataTransfer.effectAllowed = 'move'
     e.dataTransfer.setData('jobId', job.id)
@@ -20,6 +20,7 @@ function JobCardItem({ job, onUpdateStatus, isDragging, onDragStart }) {
       className={`kanban-job-card ${isDragging ? 'dragging' : ''}`}
       draggable="true"
       onDragStart={handleDragStart}
+      onDragEnd={onDragEnd}
     >
       <h4>{job.company}</h4>
       <p className="job-title">{job.role}</p>
@@ -36,6 +37,11 @@ export default function KanbanBoard({ jobs = [], onUpdateStatus }) {
     setDraggedJobId(jobId)
   }
 
+  const handleDragEnd = () => {
+    setDraggedJobId(null)
+    setDragOverColumn(null)
+  }
+
   const handleDragOver = (e, columnStatus) => {
     e.preventDefault()
     e.dataTransfer.dropEffect = 'move'
@@ -49,8 +55,8 @@ export default function KanbanBoard({ jobs = [], onUpdateStatus }) {
   const handleDrop = (e, columnStatus) => {
     e.preventDefault()
     const jobId = parseInt(e.dataTransfer.getData('jobId'))
-    
-    if (jobId && jobId !== draggedJobId) {
+
+    if (jobId) {
       onUpdateStatus(jobId, columnStatus)
     }
 
@@ -70,7 +76,10 @@ export default function KanbanBoard({ jobs = [], onUpdateStatus }) {
 
           return (
             <div key={column.title} className="kanban-column">
-              <h3>{column.title}</h3>
+              <div className="kanban-column-header">
+                <h3>{column.title}</h3>
+                <span className="column-count">{columnJobs.length}</span>
+              </div>
               <div 
                 className={`kanban-column-body ${dragOverColumn === column.status ? 'drag-over' : ''}`}
                 onDragOver={(e) => handleDragOver(e, column.status)}
@@ -78,16 +87,16 @@ export default function KanbanBoard({ jobs = [], onUpdateStatus }) {
                 onDrop={(e) => handleDrop(e, column.status)}
               >
                 {columnJobs.length === 0 ? (
-                  <p className="empty-message">No jobs yet</p>
+                  <p className="empty-message">No applications in this stage yet.</p>
                 ) : (
                   <div className="kanban-cards-container">
                     {columnJobs.map(job => (
                       <JobCardItem
                         key={job.id}
                         job={job}
-                        onUpdateStatus={onUpdateStatus}
                         isDragging={draggedJobId === job.id}
                         onDragStart={handleDragStart}
+                        onDragEnd={handleDragEnd}
                       />
                     ))}
                   </div>
