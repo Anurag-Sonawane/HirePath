@@ -1,4 +1,4 @@
-// Date Utility Functions for Job Application Tracker (IST)
+
 
 export function formatDate(dateString) {
   if (!dateString || typeof dateString !== 'string') {
@@ -12,7 +12,7 @@ export function formatDate(dateString) {
       return ''
     }
 
-    // month is 0-indexed in Date constructor
+
     const date = new Date(year, month - 1, day)
     const options = {
       year: 'numeric',

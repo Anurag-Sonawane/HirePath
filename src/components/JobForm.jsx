@@ -9,13 +9,13 @@ export default function JobForm({ onAddJob }) {
   const handleSubmit = (e) => {
     e.preventDefault()
     
-    // Basic validation to ensure company and role are provided
+
     if (!company.trim() || !role.trim()) {
       alert('Please fill in both Company and Role')
       return
     }
 
-    // Call the parent function to add the job
+
     onAddJob({
       company,
       role,
@@ -23,7 +23,7 @@ export default function JobForm({ onAddJob }) {
       status
     })
 
-    // Reset form fields after successful submission
+
     setCompany('')
     setRole('')
     setInterviewDate('')

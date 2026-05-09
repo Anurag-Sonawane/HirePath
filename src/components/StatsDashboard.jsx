@@ -100,51 +100,57 @@ export default function StatsDashboard({ jobs }) {
         </div>
       </div>
 
-      {/* Applied Jobs Section */}
-      <h3>Applied Jobs</h3>
+      <div className="stats-bottom-grid">
+        {/* Applied Jobs Section */}
+        <div className="stats-list-section">
+          <h3>Applied Jobs</h3>
 
-      {appliedJobs.length === 0 ? (
-        <p className="empty-state">No applied jobs yet</p>
-      ) : (
-        <div className="jobs-list">
-          {appliedJobs.map(job => (
-            <div key={job.id} className="job-item">
-              <div className="job-info">
-                <h4>{job.company}</h4>
-                <p>{job.role}</p>
-              </div>
-              <div className="job-status">
-                <span className="status-badge applied">Applied</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* Upcoming Interviews Section */}
-      <h3>Upcoming Interviews (Next 7 Days)</h3>
-
-      {interviewJobs.length === 0 ? (
-        <p className="empty-state">No upcoming interviews scheduled</p>
-      ) : (
-        <div className="interview-list">
-          {interviewJobs.map(interview => {
-            const daysUntil = getDaysUntilInterview(interview.interviewDate)
-            const daysText = daysUntil === 0 ? 'Today' : `${daysUntil} days`
-
-            return (
-              <div key={interview.id} className="interview-item">
-                <div className="interview-info">
-                  <h4>{interview.company}</h4>
-                  <p>{interview.role}</p>
-                  <p className="date">{formatDate(interview.interviewDate)}</p>
+          {appliedJobs.length === 0 ? (
+            <p className="empty-state">No applied jobs yet</p>
+          ) : (
+            <div className="jobs-list">
+              {appliedJobs.map(job => (
+                <div key={job.id} className="job-item">
+                  <div className="job-info">
+                    <h4>{job.company}</h4>
+                    <p>{job.role}</p>
+                  </div>
+                  <div className="job-status">
+                    <span className="status-badge applied">Applied</span>
+                  </div>
                 </div>
-                <div className="days-badge">{daysText}</div>
-              </div>
-            )
-          })}
+              ))}
+            </div>
+          )}
         </div>
-      )}
+
+        {/* Upcoming Interviews Section */}
+        <div className="stats-list-section">
+          <h3>Upcoming Interviews (Next 7 Days)</h3>
+
+          {interviewJobs.length === 0 ? (
+            <p className="empty-state">No upcoming interviews scheduled</p>
+          ) : (
+            <div className="interview-list">
+              {interviewJobs.map(interview => {
+                const daysUntil = getDaysUntilInterview(interview.interviewDate)
+                const daysText = daysUntil === 0 ? 'Today' : `${daysUntil} days`
+
+                return (
+                  <div key={interview.id} className="interview-item">
+                    <div className="interview-info">
+                      <h4>{interview.company}</h4>
+                      <p>{interview.role}</p>
+                      <p className="date">{formatDate(interview.interviewDate)}</p>
+                    </div>
+                    <div className="days-badge">{daysText}</div>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   )
 }
